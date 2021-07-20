@@ -69,7 +69,8 @@ console.log(jsGalleryRef);
 
 const arrayOfItems = galleryItems.map(item, createItem);
 
-function createItem() {
+function createItemsMarkup(items) {
+
   return item.preview;
 }
 console.log(arrayOfItems);
