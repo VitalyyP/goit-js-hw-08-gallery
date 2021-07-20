@@ -64,13 +64,26 @@ const galleryItems = [
   },
 ];
 
-const jsGalleryRef = document.querySelector(".js-gallery");
-console.log(jsGalleryRef);
+// const jsGalleryRef = document.querySelector(".js-gallery");
+// console.log(jsGalleryRef);
 
-const arrayOfItems = galleryItems.map(item, createItem);
+// const arrayOfItems = galleryItems.map(item, createItem);
 
 function createItemsMarkup(items) {
-
-  return item.preview;
+  return items.map((item) => {
+    ` <li class="gallery__item">
+    <a
+      class="gallery__link"
+      href="${item.original}"
+    >
+      <img
+        class="gallery__image"
+        src="${item.preview}"
+        data-source="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546_1280.jpg"
+        alt="${item.description}"
+      />
+    </a>
+  </li>;`;
+  });
 }
-console.log(arrayOfItems);
+console.log(createItemsMarkup(galleryItems));
