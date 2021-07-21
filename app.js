@@ -64,14 +64,14 @@ const galleryItems = [
   },
 ];
 
-// const jsGalleryRef = document.querySelector(".js-gallery");
-// console.log(jsGalleryRef);
+const jsGalleryRef = document.querySelector(".js-gallery");
 
-// const arrayOfItems = galleryItems.map(item, createItem);
+jsGalleryRef.insertAdjacentHTML("beforeend", createItemsMarkup(galleryItems));
 
 function createItemsMarkup(items) {
-   const markup = items.map((item) => {
-   return ` <li class="gallery__item">
+  return items
+    .map((item) => {
+      return ` <li class="gallery__item">
     <a
       class="gallery__link"
       href="${item.original}"
@@ -83,10 +83,8 @@ function createItemsMarkup(items) {
         alt="${item.description}"
       />
     </a>
-  </li>;`;
-   });
-  console.log(markup);
-}
+  </li>`;
+    })
+    .join("");
+};
 
-console.log(galleryItems);
-console.log(createItemsMarkup(galleryItems));
