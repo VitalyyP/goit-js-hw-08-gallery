@@ -70,8 +70,8 @@ const galleryItems = [
 // const arrayOfItems = galleryItems.map(item, createItem);
 
 function createItemsMarkup(items) {
-  return items.map((item) => {
-    ` <li class="gallery__item">
+   const markup = items.map((item) => {
+   return ` <li class="gallery__item">
     <a
       class="gallery__link"
       href="${item.original}"
@@ -84,6 +84,9 @@ function createItemsMarkup(items) {
       />
     </a>
   </li>;`;
-  });
+   });
+  console.log(markup);
 }
+
+console.log(galleryItems);
 console.log(createItemsMarkup(galleryItems));
