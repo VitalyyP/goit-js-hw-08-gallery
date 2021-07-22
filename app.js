@@ -68,6 +68,8 @@ const jsGalleryRef = document.querySelector(".js-gallery");
 
 jsGalleryRef.insertAdjacentHTML("beforeend", createItemsMarkup(galleryItems));
 
+jsGalleryRef.addEventListener('click', callback)
+
 function createItemsMarkup(items) {
   return items
     .map((item) => {
