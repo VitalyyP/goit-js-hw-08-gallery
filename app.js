@@ -65,10 +65,9 @@ const galleryItems = [
 ];
 
 const jsGalleryRef = document.querySelector(".js-gallery");
+const jsLightboxRef = document.querySelector('.js-lightbox');
 
 jsGalleryRef.insertAdjacentHTML("beforeend", createItemsMarkup(galleryItems));
-
-jsGalleryRef.addEventListener('click', callback)
 
 function createItemsMarkup(items) {
   return items
@@ -81,7 +80,7 @@ function createItemsMarkup(items) {
       <img
         class="gallery__image"
         src="${item.preview}"
-        data-source="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546_1280.jpg"
+        data-source="${item.original}"
         alt="${item.description}"
       />
     </a>
@@ -90,3 +89,27 @@ function createItemsMarkup(items) {
     .join("");
 };
 
+jsGalleryRef.addEventListener('click', openLightbox);
+
+function openLightbox () {
+  addClassLightboxIsOpen();
+
+}
+
+function addClassLightboxIsOpen() {
+
+}
+
+ // window.addEventListener('keypress', showEvent);
+
+// function showEvent(e) {
+
+//   if(e.key !== ' ') return;
+//   console.log(e);
+// };
+
+
+function getSrcBigImg(e) {
+  e.preventDefault();
+  console.log(e.target.dataset.source);
+};
