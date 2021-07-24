@@ -67,8 +67,9 @@ const galleryItems = [
 const jsGalleryRef = document.querySelector(".js-gallery");
 const jsLightboxRef = document.querySelector(".js-lightbox");
 const jsLightboxImageRef = jsLightboxRef.querySelector(".lightbox__image");
-const jsButtonCloseLightboxRef =
-  jsLightboxRef.querySelector(".lightbox__button");
+const jsButtonCloseLightboxRef = jsLightboxRef.querySelector(
+  "[data-action='close-lightbox']"
+);
 
 jsGalleryRef.insertAdjacentHTML("beforeend", createItemsMarkup(galleryItems));
 
