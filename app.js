@@ -67,6 +67,7 @@ const galleryItems = [
 const jsGalleryRef = document.querySelector(".js-gallery");
 const jsLightboxRef = document.querySelector(".js-lightbox");
 const jsLightboxImageRef = jsLightboxRef.querySelector(".lightbox__image");
+const jsLightboxOverlayRef = jsLightboxRef.querySelector(".lightbox__overlay");
 const jsButtonCloseLightboxRef = jsLightboxRef.querySelector(
   "[data-action='close-lightbox']"
 );
@@ -94,12 +95,26 @@ function createItemsMarkup(items) {
 }
 
 jsGalleryRef.addEventListener("click", openLightbox);
-jsButtonCloseLightboxRef.addEventListener('click', closeLightbox);
+jsButtonCloseLightboxRef.addEventListener("click", closeLightbox);
+jsLightboxOverlayRef.addEventListener("click", closeLightbox);
+window.addEventListener("keyup", closeLightboxByEsc);
+window.addEventListener("keydown", changeImg);
+
+// function showEvent(e) {
+//   e.preventDefault();
+//   if(e.key !== ' ') return;
+//   openLightboxBySpace();
+//   console.log(e.key);
+// }
 
 function openLightbox(e) {
+  if (e.target.nodeName !== "IMG") {
+    return;
+  }
   e.preventDefault();
   addClassLightboxIsOpen();
   addImgLightboxSrc(e);
+  // console.log(e);
 }
 
 function addClassLightboxIsOpen() {
@@ -109,14 +124,6 @@ function addClassLightboxIsOpen() {
 function addImgLightboxSrc(e) {
   jsLightboxImageRef.src = `${getSrcBigImg(e)}`;
 }
-
-//  // window.addEventListener('keypress', showEvent);
-
-// // function showEvent(e) {
-
-// //   if(e.key !== ' ') return;
-// //   console.log(e);
-// // };
 
 function getSrcBigImg(e) {
   return e.target.dataset.source;
@@ -132,5 +139,50 @@ function removeClassLightBoxIsOpen() {
 }
 
 function clearImgLightboxSrc() {
-  jsLightboxImageRef.src = '';
+  jsLightboxImageRef.src = "";
+}
+
+// function openLightboxBySpace(e) {
+//   if (e.key !== ' ') {
+//     return;
+//   }
+//   // e.preventDefault();
+//   addClassLightboxIsOpen();
+//   addImgLightboxSrcByKeybord(e);
+//   // console.log(e.target.nodeName);
+// }
+
+// function getSrcBigImgByKeybord(e) {
+//   return e.currenTarget.dataset.source;
+// }
+
+// function addImgLightboxSrcByKeybord(e) {
+//   jsLightboxImageRef.src = `${getSrcBigImgByKeybord(e)}`;
+// }
+
+function closeLightboxByEsc(e) {
+  if (e.key !== "Escape") {
+    return;
+  }
+  removeClassLightBoxIsOpen();
+  clearImgLightboxSrc();
+}
+
+
+
+
+
+ 
+function changeImg(e) {
+  // if (e.key !== "ArrowRigth") {
+  //   return;
+  // }
+
+  // const arrayOfImages = galleryItems.map((item) => item.original);
+  // const indexOfCuttenrImg = arrayOfImages.indexOf(`${jsLightboxImageRef.src}`);
+  
+  
+  // console.dir(arrayOfImages);
+  // console.log(indexOfCuttenrImg);
+  console.log(e);
 }
