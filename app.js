@@ -98,6 +98,14 @@ jsGalleryRef.addEventListener("click", openLightbox);
 jsButtonCloseLightboxRef.addEventListener("click", closeLightbox);
 jsLightboxOverlayRef.addEventListener("click", closeLightbox);
 window.addEventListener("keyup", closeLightboxByEsc);
+window.addEventListener("keydown", changeImg);
+
+// function showEvent(e) {
+//   e.preventDefault();
+//   if(e.key !== ' ') return;
+//   openLightboxBySpace();
+//   console.log(e.key);
+// }
 
 function openLightbox(e) {
   if (e.target.nodeName !== "IMG") {
@@ -106,6 +114,7 @@ function openLightbox(e) {
   e.preventDefault();
   addClassLightboxIsOpen();
   addImgLightboxSrc(e);
+  // console.log(e);
 }
 
 function addClassLightboxIsOpen() {
@@ -133,10 +142,43 @@ function clearImgLightboxSrc() {
   jsLightboxImageRef.src = "";
 }
 
+// function openLightboxBySpace(e) {
+//   if (e.key !== ' ') {
+//     return;
+//   }
+//   // e.preventDefault();
+//   addClassLightboxIsOpen();
+//   addImgLightboxSrcByKeybord(e);
+//   // console.log(e.target.nodeName);
+// }
+
+// function getSrcBigImgByKeybord(e) {
+//   return e.currenTarget.dataset.source;
+// }
+
+// function addImgLightboxSrcByKeybord(e) {
+//   jsLightboxImageRef.src = `${getSrcBigImgByKeybord(e)}`;
+// }
+
 function closeLightboxByEsc(e) {
   if (e.key !== "Escape") {
     return;
   }
   removeClassLightBoxIsOpen();
   clearImgLightboxSrc();
+}
+
+function changeImg(e) {
+  const arrayOfImages = galleryItems.map((item) => item.original);
+  const indexOfCurrentImg = arrayOfImages.indexOf(`${jsLightboxImageRef.src}`);
+  if (e.key === "ArrowRight") {
+    jsLightboxImageRef.src = arrayOfImages[indexOfCurrentImg + 1];
+  }
+  if (e.key === "ArrowLeft") {
+    jsLightboxImageRef.src = arrayOfImages[indexOfCurrentImg - 1];
+  }
+
+  // console.dir(arrayOfImages);
+  console.log(indexOfCurrentImg);
+  // console.log(e.key);
 }
