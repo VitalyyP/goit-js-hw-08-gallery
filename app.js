@@ -97,15 +97,16 @@ function createItemsMarkup(items) {
 jsGalleryRef.addEventListener("click", openLightbox);
 jsButtonCloseLightboxRef.addEventListener("click", closeLightbox);
 jsLightboxOverlayRef.addEventListener("click", closeLightbox);
-window.addEventListener("keyup", closeLightboxByEsc);
+window.addEventListener("keydown", closeLightboxByEsc);
 window.addEventListener("keydown", changeImg);
+window.addEventListener("keydown", openLightboxByEnterOrSpace);
 
-// function showEvent(e) {
-//   e.preventDefault();
-//   if(e.key !== ' ') return;
-//   openLightboxBySpace();
-//   console.log(e.key);
-// }
+function openLightboxByEnterOrSpace(e) {
+  if (e.key !== "Enter" && e.key !== " ") return;
+  e.preventDefault();
+  addClassLightboxIsOpen();
+  addImgLightboxSrcByEnterOrSpace(e);
+}
 
 function openLightbox(e) {
   if (e.target.nodeName !== "IMG") {
@@ -114,7 +115,6 @@ function openLightbox(e) {
   e.preventDefault();
   addClassLightboxIsOpen();
   addImgLightboxSrc(e);
-  // console.log(e);
 }
 
 function addClassLightboxIsOpen() {
@@ -124,9 +124,15 @@ function addClassLightboxIsOpen() {
 function addImgLightboxSrc(e) {
   jsLightboxImageRef.src = `${getSrcBigImg(e)}`;
 }
+function addImgLightboxSrcByEnterOrSpace(e) {
+  jsLightboxImageRef.src = `${getSrcBigImgByEnterOrSpace(e)}`;
+}
 
 function getSrcBigImg(e) {
   return e.target.dataset.source;
+}
+function getSrcBigImgByEnterOrSpace(e) {
+  return e.target.href;
 }
 
 function closeLightbox() {
@@ -142,24 +148,6 @@ function clearImgLightboxSrc() {
   jsLightboxImageRef.src = "";
 }
 
-// function openLightboxBySpace(e) {
-//   if (e.key !== ' ') {
-//     return;
-//   }
-//   // e.preventDefault();
-//   addClassLightboxIsOpen();
-//   addImgLightboxSrcByKeybord(e);
-//   // console.log(e.target.nodeName);
-// }
-
-// function getSrcBigImgByKeybord(e) {
-//   return e.currenTarget.dataset.source;
-// }
-
-// function addImgLightboxSrcByKeybord(e) {
-//   jsLightboxImageRef.src = `${getSrcBigImgByKeybord(e)}`;
-// }
-
 function closeLightboxByEsc(e) {
   if (e.key !== "Escape") {
     return;
@@ -171,15 +159,15 @@ function closeLightboxByEsc(e) {
 function changeImg(e) {
   const arrayOfImages = galleryItems.map((item) => item.original);
   const indexOfCurrentImg = arrayOfImages.indexOf(`${jsLightboxImageRef.src}`);
+  let indexOfNextImg;
   if (e.key === "ArrowRight") {
-    jsLightboxImageRef.src = arrayOfImages[indexOfCurrentImg + 1];
+    indexOfNextImg =
+      indexOfCurrentImg != arrayOfImages.length - 1 ? indexOfCurrentImg + 1 : 0;
+    jsLightboxImageRef.src = arrayOfImages[indexOfNextImg];
   }
   if (e.key === "ArrowLeft") {
-    jsLightboxImageRef.src = arrayOfImages[indexOfCurrentImg - 1];
+    indexOfNextImg =
+      indexOfCurrentImg != 0 ? indexOfCurrentImg - 1 : arrayOfImages.length - 1;
+    jsLightboxImageRef.src = arrayOfImages[indexOfNextImg];
   }
-
-  // console.dir(arrayOfImages);
-  console.log(indexOfCurrentImg);
-  // console.log(e.key);
 }
-
