@@ -81,8 +81,7 @@ function createItemsMarkup(items) {
     <a
       class="gallery__link"
       href="${item.original}"
-      target="_self"
-    >
+      >
       <img
         class="gallery__image"
         src="${item.preview}"
