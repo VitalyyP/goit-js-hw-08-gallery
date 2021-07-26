@@ -81,7 +81,7 @@ function createItemsMarkup(items) {
     <a
       class="gallery__link"
       href="${item.original}"
-    >
+      >
       <img
         class="gallery__image"
         src="${item.preview}"
@@ -182,3 +182,4 @@ function changeImg(e) {
   console.log(indexOfCurrentImg);
   // console.log(e.key);
 }
+
